@@ -56,6 +56,9 @@ typedef struct {
 	void      (* closing)     (SoupWebsocketConnection *self);
 
 	void      (* closed)      (SoupWebsocketConnection *self);
+
+	void      (* pingpong)    (SoupWebsocketConnection *self);
+
 } SoupWebsocketConnectionClass;
 
 SOUP_AVAILABLE_IN_2_50

@@ -87,6 +87,7 @@ enum {
 	ERROR,
 	CLOSING,
 	CLOSED,
+	PINGPONG,
 	NUM_SIGNALS
 };
 
@@ -553,6 +554,8 @@ receive_ping (SoupWebsocketConnection *self,
 	/* Send back a pong with same data */
 	g_debug ("received ping, responding");
 	send_message (self, SOUP_WEBSOCKET_QUEUE_URGENT, 0x0A, data, len);
+
+	g_signal_emit (self, signals[PINGPONG], 0);
 }
 
 static void
@@ -1267,6 +1270,14 @@ soup_websocket_connection_class_init (SoupWebsocketConnectionClass *klass)
 					SOUP_TYPE_WEBSOCKET_CONNECTION,
 					G_SIGNAL_RUN_FIRST,
 					G_STRUCT_OFFSET (SoupWebsocketConnectionClass, closed),
+					NULL, NULL, g_cclosure_marshal_generic,
+					G_TYPE_NONE, 0);
+
+
+	signals[PINGPONG] = g_signal_new ("pingpong",
+					SOUP_TYPE_WEBSOCKET_CONNECTION,
+					G_SIGNAL_RUN_FIRST,
+					G_STRUCT_OFFSET (SoupWebsocketConnectionClass, pingpong),
 					NULL, NULL, g_cclosure_marshal_generic,
 					G_TYPE_NONE, 0);
 }
