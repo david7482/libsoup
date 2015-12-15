@@ -104,6 +104,9 @@ void                soup_websocket_connection_send_binary    (SoupWebsocketConne
 							      gsize length);
 
 SOUP_AVAILABLE_IN_2_50
+void                soup_websocket_connection_send_ping      (SoupWebsocketConnection *self);
+
+SOUP_AVAILABLE_IN_2_50
 void                soup_websocket_connection_close          (SoupWebsocketConnection *self,
 							      gushort code,
 							      const char *data);

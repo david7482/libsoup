@@ -1532,6 +1532,15 @@ soup_websocket_connection_send_binary (SoupWebsocketConnection *self,
 	send_message (self, SOUP_WEBSOCKET_QUEUE_NORMAL, 0x02, data, length);
 }
 
+void
+soup_websocket_connection_send_ping (SoupWebsocketConnection *self)
+{
+	g_return_if_fail (SOUP_IS_WEBSOCKET_CONNECTION (self));
+	g_return_if_fail (soup_websocket_connection_get_state (self) == SOUP_WEBSOCKET_STATE_OPEN);
+
+	send_message (self, SOUP_WEBSOCKET_QUEUE_URGENT, 0x09, NULL, 0);
+}
+
 /**
  * soup_websocket_connection_close:
  * @self: the WebSocket
