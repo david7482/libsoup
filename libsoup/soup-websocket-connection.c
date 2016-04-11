@@ -132,7 +132,7 @@ struct _SoupWebsocketConnectionPrivate {
 	GByteArray *message_data;
 };
 
-#define MAX_PAYLOAD   128 * 1024
+#define MAX_PAYLOAD   1024 * 1024
 
 G_DEFINE_TYPE (SoupWebsocketConnection, soup_websocket_connection, G_TYPE_OBJECT)
 
